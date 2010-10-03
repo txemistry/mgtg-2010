@@ -3,7 +3,7 @@ package iso3.pt.model;
 public class Evaluacion 
 {
 
-	//Esta clase va a tener fos atributos externos
+	//Esta clase va a tener dos atributos externos
 	
 	private Integer id;
 	private String concepto;
