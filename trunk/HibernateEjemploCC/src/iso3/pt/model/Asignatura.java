@@ -11,7 +11,7 @@ public class Asignatura {
 	private Integer codigo;
 	private String nombre;
 	private float creditos;
-	private Integer profesor; //le viene de la clase profesor
+	private Profesor profesor; //le viene de la clase profesor
 	private Set<Unidad> unidades; //Lista que le viene de Unidad
 	private Set<Alumno> alumnos; //Lista que le viene de Alumno
 
@@ -72,12 +72,12 @@ public class Asignatura {
 		this.creditos = creditos;
 	}
 
-	public Integer getProfesor() 
+	public Profesor getProfesor() 
 	{
 		return profesor;
 	}
 
-	public void setProfesor(Integer profesor) 
+	public void setProfesor(Profesor profesor) 
 	{
 		this.profesor = profesor;
 	}

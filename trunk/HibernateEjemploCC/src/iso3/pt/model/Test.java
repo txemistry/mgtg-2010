@@ -1,183 +1,103 @@
-package iso3.hib.ejemploCC;
+package iso3.pt.model;
 
-import java.util.*;
-
-import org.hibernate.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+public class Test 
+{
 
-public class Test { 
+	SessionFactory sessionFactory;
 	
-		SessionFactory sessionFactory;
-		
-		public Test(){
-			sessionFactory = new Configuration().configure().buildSessionFactory();
-		}
-	
-		public void inserciones1(){
-	    	
-	        Session session = sessionFactory.openSession();
-	        Transaction tx = session.beginTransaction();
-	        
-	        Departamento dep1 = new Departamento("Ingenieria del Software");
-	        Departamento dep2 = new Departamento("Servicios - ESIDE");
-	        
-	        Empleado emp1 = new Empleado(111, "Asier Perallos", "profesor", "perallos@eside.deusto.es");
-	        Empleado emp2 = new Empleado(222, "Diego Lopez de Ipina", "profesor", "dipina@eside.deusto.es");
-	        Empleado emp3 = new Empleado(333, "Maite Sanchez", "secretaria", "msanchez@eside.deusto.es");
-	        Empleado emp4 = new Empleado(444, "Ana Carrera", "secretaria", "acarrera@eside.deusto.es");
-	        
-	        dep1.addEmpleado(emp1);
-	        dep1.addEmpleado(emp2);
-	        emp1.setDepartamento(dep1);
-	        emp2.setDepartamento(dep1);
-	        
-	        session.save(dep1); // Se salvan los dos empleados del "dep1" en cascada
-	        session.save(dep2);
-	        
-	        dep2.addEmpleado(emp3);
-	        dep2.addEmpleado(emp4);
-	        emp3.setDepartamento(dep2);
-	        emp4.setDepartamento(dep2);
-	        
-	        session.save(emp3); // Innecesarias, se insertarían los dos empleados al actualizar el "dep2"
-	        session.save(emp4);
-	        
-	        tx.commit();
-	        session.close();
-	        System.out.println("Done inserciones1!");
-		}
-		
-		public void busquedaPK(){
-
-	        Session session = sessionFactory.openSession();
-	        Transaction tx = session.beginTransaction();
-	        
-	        Empleado emp1 = (Empleado) session.get(Empleado.class, 111);
-	        System.out.println(emp1);
-	        emp1.setNombre("Asier Perallos Ruiz");
-	        session.flush();
-	        
-	        Departamento dep = emp1.getDepartamento();
-	        System.out.println(dep);
-	        
-	        Set<Empleado> empleados = dep.getEmpleados();
-	        for (Iterator<Empleado> iter = empleados.iterator(); iter.hasNext();) {
-	        	Empleado emp2 = iter.next();
-	        	System.out.println(emp2);	
-	        }
-	        
-	        tx.commit();
-	        session.close();
-	        System.out.println("Done busquedaPK!");
-		}
-		
-		public void inserciones2(){
-	    	
-	        Session session = sessionFactory.openSession();
-	        Transaction tx = session.beginTransaction();
-	        
-	        Direccion dir1 = new Direccion("Calle1 - Bilbao", 48007);
-	        Direccion dir2 = new Direccion("Calle2 - Portugalete", 48920);
-	        
-	        session.save(dir1);
-	        session.save(dir2);
-	        
-	        Empleado emp1 = (Empleado) session.get(Empleado.class, 111);
-	        Empleado emp2 = (Empleado) session.get(Empleado.class, 222);
-	        
-	        dir1.addEmpleado(emp1);
-	        dir1.addEmpleado(emp2);
-	        
-	        emp1.addDireccion(dir1);
-	        emp2.addDireccion(dir1);
-	        
-	        dir2.addEmpleado(emp1);
-	        emp1.addDireccion(dir2);
-	        
-	        tx.commit();
-	        session.close();
-	        System.out.println("Done inserciones2!");
-	        
-		}
-		
-		public void busquedaCompleja(){
-	    	
-	        Session session = sessionFactory.openSession();
-	        Transaction tx = session.beginTransaction();
-	        
-	        List<Empleado> empleados = session.createQuery("from Empleado as emp where emp.departamento.nombre = 'Servicios - ESIDE' and emp.puesto = 'secretaria'").list();
-	        
-	        for (Iterator<Empleado> iter = empleados.iterator(); iter.hasNext();) {
-	            Empleado emp1 = iter.next();
-	            System.out.println(emp1);
-	        }
-	        
-	        tx.commit();
-	        session.close();
-	        System.out.println("Done busquedaCompleja!");
-	        
-	        
-		}
-		
-		public void borrado(){
-	    	
-	        Session session = sessionFactory.openSession();
-	        Transaction tx = session.beginTransaction();
-	        
-	        Empleado emp1 = (Empleado) session.get(Empleado.class, 222);
-	        
-	        Set<Direccion> direcciones = emp1.getDirecciones();
-	        
-	        for (Iterator<Direccion> iter = direcciones.iterator(); iter.hasNext();) {
-	            Direccion dir = iter.next();
-	            emp1.removeDireccion(dir);
-	        }
-	        emp1.getDirecciones().clear();
-	        emp1.getDepartamento().removeEmpleado(emp1);
-	        
-	        session.delete(emp1);
-	        
-	        tx.commit();
-	        session.close();
-	        System.out.println("Done borrado!");
-		}
-		
-		public void inserciones3(){
-	    	
-	        Session session = sessionFactory.openSession();
-	        Transaction tx = session.beginTransaction();
-	        
-	        Departamento dep3 = new Departamento("Comercial");
-	        
-	        Externo ext1 = new Externo(555, "Externo1", "profesor", "ext1@unicomer.es", "Iberdrola", "ext1@iberdrola.es", "bla, bla,...");
-	        
-	        ext1.setDepartamento(dep3);
-	        dep3.addEmpleado(ext1);
-	        
-	        session.save(dep3);
-	        session.save(ext1);
-	        
-	        Externo ext = (Externo) session.get(Externo.class, 555);
-	        System.out.println(ext);
-	        
-	        tx.commit();
-	        session.close();
-	        System.out.println("Done inserciones3!");
-		}
-		
-		public void close(){
-	        sessionFactory.close();
-		}
-
-	    public static void main(String[] args) {
-	    	Test t1 = new Test();
-	    	t1.inserciones1();
-	    	t1.busquedaPK();
-	    	t1.inserciones2();
-	    	t1.busquedaCompleja();
-	    	t1.borrado();
-	    	t1.inserciones3();
-	    	t1.close();
-	    }
+	public Test()
+	{
+		sessionFactory = new Configuration().configure().buildSessionFactory();
 	}
+	
+
+	
+	/*public void testProfesor()
+	{
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		Profesor prof1 = new Profesor(1111, 11111111, "1111", "prof1", "11111111", "1111@iso3.com", "D1111");
+		Profesor prof2 = new Profesor(2222, 22222222, "2222", "prof2", "22222222", "2222@iso3.com", "D2222");
+		
+		session.save(prof1);
+		session.save(prof2);
+		tx.commit();
+		session.close();
+		System.out.println("Se han metido los profs");
+	}*/
+	
+	/*public void testUnidad()
+	{
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		Unidad unidad1 = new Unidad(11, "T1", "Introduccion", "Introduccion");
+		
+		session.save(unidad1);
+		tx.commit();
+		session.close();
+		System.out.println("se han introducido las unidades");
+	}*/
+	
+	public void testAsignatura()
+	{
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		Profesor prof1 = new Profesor(1111, 11111111, "1111", "prof1", "11111111", "1111@iso3.com", "D1111");
+		Profesor prof2 = new Profesor(2222, 22222222, "2222", "prof2", "22222222", "2222@iso3.com", "D2222");
+		
+		session.save(prof1);
+		session.save(prof2);
+	
+		Asignatura asig1 = new Asignatura(11, 11, "iso3", 9);
+		Asignatura asig2 = new Asignatura(22, 22, "edr", 6);
+		
+		Unidad unidad1 = new Unidad("T1", "Introduccion", "Introduccion");
+		Unidad unidad2 = new Unidad("T2", "Tema2", "Tecnologias web");
+		Unidad unidad3 = new Unidad("T3", "Tema3", "Switches");
+		Unidad unidad4 = new Unidad("T4", "Tema4", "Routers");
+		
+		asig1.addUnidad(unidad1);
+		asig1.addUnidad(unidad2);
+		asig2.addUnidad(unidad3);
+		asig2.addUnidad(unidad4);
+		
+		
+		asig1.setProfesor(prof1);
+		asig2.setProfesor(prof2);
+		
+		session.save(asig1);
+		session.save(asig2);
+		
+		tx.commit();
+		session.close();
+		System.out.println("se han introducido las asignaturas");
+	}
+	
+	public void close()
+	{
+        sessionFactory.close();
+	}
+	
+	
+	
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+		
+		Test test = new Test();
+		//test.testProfesor();
+		//test.testUnidad();
+		test.testAsignatura(); //se meteran las asignaturas y las unidades
+		test.close();
+
+	}
+
+}

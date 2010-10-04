@@ -13,10 +13,9 @@ public class Unidad {
 	protected Unidad()
 	{}
 
-	public Unidad(Integer id, String acronimo, String titulo, String contenido) 
+	public Unidad(String acronimo, String titulo, String contenido) 
 	{
 		super();
-		this.id = id;
 		this.acronimo = acronimo;
 		this.titulo = titulo;
 		this.contenido = contenido;
