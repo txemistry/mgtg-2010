@@ -16,11 +16,11 @@
 		<property name="telefono" column="ALUM_TLF" />
 		
 		<set name="evaluaciones" lazy="true" cascade="all" inverse="true">
-			<key column"ALUM_DNI" />
+			<key column="ALUM_DNI" />
 			<one-to-many class="iso3.pt.model.Evaluacion" />
 		</set>
 		
-		<set name="asignautras" table="MATRICULA" lazy="true">
+		<set name="asignaturas" table="MATRICULACIONES" lazy="true">
 			<key column="ALUM_DNI" />
 			<many-to-many column="ASIG_ID" class="iso3.pt.model.Asignatura" />
 		</set>

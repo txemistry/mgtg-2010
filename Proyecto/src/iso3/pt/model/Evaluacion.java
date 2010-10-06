@@ -8,8 +8,8 @@ public class Evaluacion
 	private Integer id;
 	private String concepto;
 	private float nota;
-	private Integer alumno; //Identificador del alumno al qeu pertenece dicha evaluacion
-	private Integer asignatura; //Identificador de la asignatura a la que pertenece dicha evaluacion
+	private Alumno alumno; //alumno al qeu pertenece dicha evaluacion
+	private Asignatura asignatura; //la asignatura a la que pertenece dicha evaluacion
 	
 	
 	//CONSTRUCTOR VACIO Y CON ARGUMENTOS
@@ -56,22 +56,22 @@ public class Evaluacion
 		this.nota = nota;
 	}
 
-	public Integer getAlumno() 
+	public Alumno getAlumno() 
 	{
 		return alumno;
 	}
 
-	public void setAlumno(Integer alumno) 
+	public void setAlumno(Alumno alumno) 
 	{
 		this.alumno = alumno;
 	}
 
-	public Integer getAsignatura() 
+	public Asignatura getAsignatura() 
 	{
 		return asignatura;
 	}
 
-	public void setAsignatura(Integer asignatura) 
+	public void setAsignatura(Asignatura asignatura) 
 	{
 		this.asignatura = asignatura;
 	}
