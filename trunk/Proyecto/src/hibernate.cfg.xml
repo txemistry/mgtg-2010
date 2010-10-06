@@ -30,6 +30,8 @@
         <mapping resource="iso3/pt/model/Profesor.hbm.xml"/>
         <mapping resource="iso3/pt/model/Unidad.hbm.xml"/>
         <mapping resource="iso3/pt/model/Asignatura.hbm.xml"/>
+        <mapping resource="iso3/pt/model/Alumno.hbm.xml"/>
+        <mapping resource="iso3/pt/model/Evaluacion.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
