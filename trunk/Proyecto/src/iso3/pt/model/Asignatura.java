@@ -124,7 +124,8 @@ public class Asignatura {
 
 	public String toString()
 	{
-		return "( " + this.id + " | " + this.codigo + " | " + this.nombre + " | " + this.creditos + " | " + this.profesor + " )";
+		return "( " + this.id + " | " + this.codigo + " | " + this.nombre + " | " + this.creditos + " | " + this.profesor.getId()+ " )";
+
 	}
 
 }
