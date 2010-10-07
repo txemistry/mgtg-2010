@@ -1,4 +1,4 @@
-/*package iso3.pt.model;
+package iso3.pt.model;
 
 import java.util.*;
 
@@ -181,4 +181,3 @@ public class TestEjemplo {
 	    	t1.close();
 	    }
 	}
-*/
