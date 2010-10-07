@@ -1,11 +1,11 @@
 package iso3.pt.dao;
 
 import iso3.pt.model.Asignatura;
+
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,14 +17,16 @@ public class ptDAO implements IptDAO
 	private static ptDAO instancia = null;
 	private SessionFactory sessionFactory = null;
 
-	
+	//********************************************************************************//
+	//********************************************************************************//
+	//********************************************************************************//
+
 	private ptDAO()
 	{
 		sessionFactory = new Configuration().configure().buildSessionFactory();
 		cargarCache();
 	}
     
-    //METHOD THAT RETURN AN INSTANCE OF THE FACTORY
     public static ptDAO getInstancia()
     {
             if(instancia == null)
@@ -34,17 +36,12 @@ public class ptDAO implements IptDAO
             return instancia;
     }
     
-    //PRIVATE CONSTRUCTOR THAT IS GOING TO BE USED BY THE GETINSTANCE
-    //USERS ARE NEVER GOING TO HAVE ACCESS TO THIS METHOD
     private static ptDAO ptDAOInstancia() 
     {
     		return new ptDAO();
     }
 	
 	
-	
-        
-	 
 	private void  cargarCache()
 	{
 		List<Asignatura> asig = obtenerAsignaturas(); 
@@ -57,21 +54,28 @@ public class ptDAO implements IptDAO
 		}
 	}
 	
-	 
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	private List<Asignatura> obtenerAsignaturas()
 	{
 		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
-        List<Asignatura> listAsig = session.createQuery("from Asignatura").list();
+        @SuppressWarnings("unchecked")
+		List<Asignatura> listAsig = session.createQuery("from Asignatura").list();
    
-        
         tx.commit();
         session.close();
         return listAsig;
 	}
 	
+	//********************************************************************************//
+	//********************************************************************************//
+	//********************************************************************************//
+	
+	
+	public void close()
+	{
+        sessionFactory.close();
+	}
 	
 	public Map<Integer, Asignatura> getCache()
 	{
