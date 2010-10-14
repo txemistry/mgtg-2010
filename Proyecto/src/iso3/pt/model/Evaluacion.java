@@ -81,7 +81,7 @@ public class Evaluacion
 	//OTROS METODOS IMPORTANTES
 	public String toString()
 	{
-		return "( " + this.id + " | " + this.concepto + " | " + this.nota + " | " + this.alumno +  " | " +  this.asignatura + " )";
+		return "( " + this.id + " | " + this.concepto + " | " + this.nota + " )";
 	}
 	
 	

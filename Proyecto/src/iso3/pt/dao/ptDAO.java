@@ -1,11 +1,17 @@
 package iso3.pt.dao;
 
+import iso3.pt.model.Alumno;
 import iso3.pt.model.Asignatura;
+import iso3.pt.model.Evaluacion;
+import iso3.pt.model.Profesor;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -45,7 +51,6 @@ public class ptDAO implements IptDAO
 	private void  cargarCache()
 	{
 		List<Asignatura> asig = obtenerAsignaturas(); 
-		System.out.println("estoy en la carga y la lista tiene " + asig.size());
 		
 		asignaturas = new HashMap<Integer, Asignatura>();
 		for(Asignatura a:asig)
@@ -54,24 +59,19 @@ public class ptDAO implements IptDAO
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private List<Asignatura> obtenerAsignaturas()
 	{
 		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
-        @SuppressWarnings("unchecked")
 		List<Asignatura> listAsig = session.createQuery("from Asignatura").list();
    
         tx.commit();
         session.close();
         return listAsig;
 	}
-	
-	//********************************************************************************//
-	//********************************************************************************//
-	//********************************************************************************//
-	
-	
+
 	public void close()
 	{
         sessionFactory.close();
@@ -81,5 +81,49 @@ public class ptDAO implements IptDAO
 	{
 		return this.asignaturas;
 	}
+
+	
+	
+	//********************************************************************************//
+	//********************************************************************************//
+	//********************************************************************************//
+	
+	@Override
+	public Profesor getProfesor(int idAsignatura) 
+	{
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+        Integer idProfesor = asignaturas.get(idAsignatura).getProfesor().getId();
+        
+        Profesor profesor = (Profesor) session.get(Profesor.class, idProfesor);
+        
+        tx.commit();
+        session.close();
+		return profesor;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Set<Evaluacion> getEvaluaciones(int idAsignatura, int idAlumno) 
+	{
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        Set<Evaluacion> evaluaciones = new HashSet<Evaluacion>();
+        
+        Alumno alumno = (Alumno) session.createQuery("from Alumno where alum_dni = " + idAlumno).uniqueResult();
+        Set<Evaluacion> evs = alumno.getEvaluaciones();
+        
+        for(Evaluacion ev:evs)
+        {
+        	if(ev.getAsignatura().getId().equals(idAsignatura))
+        		evaluaciones.add(ev);
+        }
+        
+        tx.commit();
+        session.close();
+		return evaluaciones;
+	}
+	
 }
 
