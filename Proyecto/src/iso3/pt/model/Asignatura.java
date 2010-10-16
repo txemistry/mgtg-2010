@@ -127,5 +127,9 @@ public class Asignatura {
 		return "( " + this.id + " | " + this.codigo + " | " + this.nombre + " | " + this.creditos + " | " + this.profesor.getId()+ " )";
 
 	}
+	public boolean estaMatriculado(Alumno alumno)
+	{
+		return false;
+	}
 
 }
