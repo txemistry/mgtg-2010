@@ -1,5 +1,6 @@
 package iso3.pt.dao;
 
+import iso3.pt.model.Alumno;
 import iso3.pt.model.Asignatura;
 import iso3.pt.model.Evaluacion;
 import iso3.pt.model.Profesor;
@@ -25,7 +26,11 @@ public class pruebaDAO {
 		{
 			Map.Entry ent = (Map.Entry)it.next();
 			Asignatura asig = (Asignatura)ent.getValue();
-			System.out.println(asig.toString());
+			//System.out.println(asig.toString());
+			System.out.println(asig.getProfesor().toString());
+			//Set<Alumno> alumnos = asig.getAlumnos();
+			//for(Alumno al:alumnos)
+				//System.out.println(al.toString());
 		}
 		System.out.println();
 		System.out.println();
@@ -45,6 +50,12 @@ public class pruebaDAO {
 			System.out.println(e.toString());
 		System.out.println();
 		System.out.println();
+		
+		//Prueba de getAlumnos
+		System.out.println("Prueba de getAlumnos");
+		Set<Alumno> alumnos = dao.getAlumnos(1);
+		for(Alumno al:alumnos)
+			System.out.println(al.getNombre());
 	}
 
 }
