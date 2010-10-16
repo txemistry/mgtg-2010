@@ -46,6 +46,13 @@
             </classpath>
         </java>
     </target>
+	<target name="probarDao" depends="build">
+	        <java classname="iso3.pt.dao.pruebaDAO" fork="true">
+	            <classpath>
+	                <path refid="classpath"/>
+	            </classpath>
+	        </java>
+	    </target>
     <target name="help">
 		<echo>Usage: ant [build | test | clean]</echo>
 	</target>
