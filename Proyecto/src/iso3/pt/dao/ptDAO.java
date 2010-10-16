@@ -1,9 +1,12 @@
 package iso3.pt.dao;
 
+import iso3.pt.dao.excepciones.IncorrectPasswordException;
+import iso3.pt.dao.excepciones.UserNotFoundException;
 import iso3.pt.model.Alumno;
 import iso3.pt.model.Asignatura;
 import iso3.pt.model.Evaluacion;
 import iso3.pt.model.Profesor;
+import iso3.pt.model.Unidad;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -93,9 +96,8 @@ public class ptDAO implements IptDAO
 	{
 		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        
-        Integer idProfesor = asignaturas.get(idAsignatura).getProfesor().getId();
-        
+    
+        Integer idProfesor = asignaturas.get(idAsignatura).getProfesor().getId();    
         Profesor profesor = (Profesor) session.get(Profesor.class, idProfesor);
         
         tx.commit();
@@ -123,6 +125,99 @@ public class ptDAO implements IptDAO
         tx.commit();
         session.close();
 		return evaluaciones;
+	}
+
+	@Override
+	public Set<Alumno> getAlumnos(int idAsignatura) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Evaluacion> getEvaluacionesOrderedByAsignatura(int idAlumno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addEvaluacion(String concepto, float nota, int idAsignatura,
+			int idAlumno) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Set<Unidad> getUnidades(int idAsignatura) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Asignatura> getAsignaturas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Alumno getAlumno(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Asignatura getAsignatura(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Alumno loginAlumno(int dni, String pass)
+			throws UserNotFoundException, IncorrectPasswordException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Asignatura> getAsignaturas(int idAlumno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void matricular(int idAlumno, int idAsignatura) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void desmatricular(int idAlumno, int idAsignatura) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Profesor loginProfesor(int dni, String pass)
+			throws UserNotFoundException, IncorrectPasswordException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Asignatura> getAsignaturasProfesor(int idProfesor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Profesor getProfesorByDni(int dni) throws UserNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Evaluacion> getEvaluacionesAsignatura(int idAsignatura) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
