@@ -129,7 +129,9 @@ public class Asignatura {
 	}
 	public boolean estaMatriculado(Alumno alumno)
 	{
-		return false;
+		Boolean b = false;
+		b=alumnos.contains(alumno);		
+		return b;
 	}
 
 }
