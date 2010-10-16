@@ -10,6 +10,7 @@ import iso3.pt.model.Unidad;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -94,15 +95,48 @@ public class ptDAO implements IptDAO
 	@Override
 	public Profesor getProfesor(int idAsignatura) 
 	{
+		/*DEBERIA SER ASI
+		 Profesor profesor = asignaturas.get(idAsignatura).getProfesor();
+		 return profesor
+		 */
+		
 		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
     
-        Integer idProfesor = asignaturas.get(idAsignatura).getProfesor().getId();    
+        Integer idProfesor = asignaturas.get(idAsignatura).getProfesor().getId();
         Profesor profesor = (Profesor) session.get(Profesor.class, idProfesor);
         
         tx.commit();
         session.close();
 		return profesor;
+	}
+	
+	@Override
+	public Set<Alumno> getAlumnos(int idAsignatura) 
+	{
+		/*DEBERIA SER ASI
+		 return asignatura.get(idAsignatura).getAlumnos();
+		 */
+		
+		Set<Alumno> alumnos = new HashSet<Alumno>();
+		Asignatura asig = asignaturas.get(idAsignatura);
+		alumnos = asig.getAlumnos();
+		return alumnos;
+	}
+	
+	@Override
+	public Set<Evaluacion> getEvaluacionesOrderedByAsignatura(int idAlumno) 
+	{
+		/*DEBERIA SER ASI
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+        List <Evaluacion> listEvaluaciones = session.createQuery("from Evaluacion where alum_dni = :idAlumno order by asig_id").list();
+        return new HashSet<Evaluacion>(listEvaluaciones);
+        
+		 */
+		
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -127,96 +161,291 @@ public class ptDAO implements IptDAO
 		return evaluaciones;
 	}
 
-	@Override
-	public Set<Alumno> getAlumnos(int idAsignatura) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
 
 	@Override
-	public Set<Evaluacion> getEvaluacionesOrderedByAsignatura(int idAlumno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addEvaluacion(String concepto, float nota, int idAsignatura,
-			int idAlumno) {
-		// TODO Auto-generated method stub
+	public void addEvaluacion(String concepto, float nota, int idAsignatura, int idAlumno) {
+		
+		/*DEBERIA SER ASI
+		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		Evaluacion evaluacion = new Evaluacion(concepto, nota);
+		Asignatura asignatura = asignaturas.get(idAsignatura);
+		evaluacion.setAsignatura(asignatura);
+		
+		Alumno alumno = session.createQuery("from Alumno where alum_dni = " + idAlumno).uniqueResult();
+		evaluacion.setAlumno(alumno);
+		
+		alumno.addEvaluacion(evaluacion);
+		
+		session.flush();
+		tx.commit();
+        session.close();
+		
+		 */
 		
 	}
 
 	@Override
-	public Set<Unidad> getUnidades(int idAsignatura) {
-		// TODO Auto-generated method stub
+	public Set<Unidad> getUnidades(int idAsignatura) 
+	{
+		/*DEBERIA SER ASI
+		
+		return asignaturas.get(idAsignatura).getUnidades();
+		
+		 */
 		return null;
 	}
 
 	@Override
-	public Set<Asignatura> getAsignaturas() {
-		// TODO Auto-generated method stub
+	public Set<Asignatura> getAsignaturas() 
+	{
+		/*DEBERIA SER ASI
+		
+		Set<Asignatura> asigs = new HashSet<Asignatura>();
+		Iterator it = asignaturas.entrySet().iterator();
+		while(it.hasNext()) 
+		{
+			Map.Entry ent = (Map.Entry)it.next();
+			Asignatura asig = (Asignatura)ent.getValue();
+			asigs.add(asig);
+		}
+		return asigs;
+		 */
 		return null;
 	}
 
 	@Override
-	public Alumno getAlumno(int id) {
-		// TODO Auto-generated method stub
+	public Alumno getAlumno(int id) 
+	{
+		
+		/*DEBERIA SER ASI
+		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		
+		Alumno alumno = (Alumno) session.get(Alumno.class,id);
+			
+		tx.commit();
+        session.close();
+        */
 		return null;
 	}
 
 	@Override
-	public Asignatura getAsignatura(int id) {
-		// TODO Auto-generated method stub
+	public Asignatura getAsignatura(int id) 
+	{
+		/*DEBERIA SER ASI
+		
+		return asignaturas.get(id);
+		
+		 */
 		return null;
 	}
 
 	@Override
-	public Alumno loginAlumno(int dni, String pass)
-			throws UserNotFoundException, IncorrectPasswordException {
-		// TODO Auto-generated method stub
+	public Alumno loginAlumno(int dni, String pass) throws UserNotFoundException, IncorrectPasswordException 
+	{
+		/*DEBERIA SER ASI
+		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		
+		Alumno alumno = (Alumno) session.get(Alumno.class,id);
+		
+		if(alumno == null)
+		{
+			throws new UserNotFoundException("UserNotFoundException: el usuario no se encontró");
+		}
+		else
+		{
+			if(alumno.getPassword.equals(pass))
+			{
+				return alumno
+			}
+			else
+			{
+				throws new IncorrectPasswordException("IncorrectPasswordException: contraseña incorrecta");
+			}
+		}
+			
+		tx.commit();
+        session.close();
+		
+		 */
+
 		return null;
 	}
 
 	@Override
-	public Set<Asignatura> getAsignaturas(int idAlumno) {
-		// TODO Auto-generated method stub
+	public Set<Asignatura> getAsignaturas(int idAlumno) 
+	{
+		/*DEBERIA SER ASI
+		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		
+		Alumno alumno = (Alumno) session.get(Alumno.class,idAlumno);
+		
+		Set<Asignatura> asigs = new HashSet<Asignatura>();
+		asigs = alumno.getAsignaturas();
+			
+		tx.commit();
+        session.close();
+		return asigs;
+		 */
+		
 		return null;
 	}
 
 	@Override
-	public void matricular(int idAlumno, int idAsignatura) {
-		// TODO Auto-generated method stub
+	public void matricular(int idAlumno, int idAsignatura) 
+	{
+		/*DEBERIA SER ASI
+		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		Asignatura asignatura = asignaturas.get(idAsignatura);		
+		Alumno alumno = (Alumno) session.get(Alumno.class, idAlumno);
+		
+		asignatura.addAlumno(alumno);
+		alumno.addAsignatura(asignatura);
+		
+		session.flush();
+		tx.commit();
+        session.close();
+		
+		 */
 		
 	}
 
 	@Override
-	public void desmatricular(int idAlumno, int idAsignatura) {
-		// TODO Auto-generated method stub
+	public void desmatricular(int idAlumno, int idAsignatura) 
+	{
+		/*DEBERIA SER ASI
 		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		Asignatura asignatura = asignaturas.get(idAsignatura);		
+		Alumno alumno = (Alumno) session.get(Alumno.class, idAlumno);
+		
+		asignatura.removeAlumno(alumno);
+		alumno.removeAsignatura(asignatura);
+		
+		session.flush();
+		tx.commit();
+        session.close();
+		
+		 */
 	}
 
 	@Override
-	public Profesor loginProfesor(int dni, String pass)
-			throws UserNotFoundException, IncorrectPasswordException {
-		// TODO Auto-generated method stub
+	public Profesor loginProfesor(int dni, String pass) throws UserNotFoundException, IncorrectPasswordException 
+	{
+		/*DEBERIA SER ASI
+		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		
+		Profesor profesor = (Profesor) session.createQuery("from Profesor where prof_dni = :dni).setString("dni",dni).uniqueResult();
+		
+		
+		if(profesor == null)
+		{
+			throws new UserNotFoundException("UserNotFoundException: el profesor no se encontró");
+		}
+		else
+		{
+			if(profesor.getPassword.equals(pass))
+			{
+				return profesor;
+			}
+			else
+			{
+				throws new IncorrectPasswordException("IncorrectPasswordException: contraseña incorrecta");
+			}
+		}
+			
+		tx.commit();
+        session.close();
+		
+		 */
 		return null;
 	}
 
 	@Override
-	public Set<Asignatura> getAsignaturasProfesor(int idProfesor) {
-		// TODO Auto-generated method stub
+	public Set<Asignatura> getAsignaturasProfesor(int idProfesor) 
+	{
+		/*DEBERIA SER ASI
+		
+		Set<Asignatura> asigs = new HashSet<Asignatura>();
+		
+		Iterator it = asignaturas.entrySet().iterator();
+		while(it.hasNext()) 
+		{
+			Map.Entry ent = (Map.Entry)it.next();
+			Asignatura asig = (Asignatura)ent.getValue();
+			
+			if(asig.getProfesor().getId().equals(idProfesor))
+				asigs.add(asig);
+		}
+		
+		return asigs;
+		
+		 */
 		return null;
 	}
 
 	@Override
-	public Profesor getProfesorByDni(int dni) throws UserNotFoundException {
-		// TODO Auto-generated method stub
+	public Profesor getProfesorByDni(int dni) throws UserNotFoundException 
+	{
+		/*DEBERIA SER ASI
+		
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+		
+		Profesor profesor = (Profesor) session.createQuery("from Profesor where prof_dni = :dni).setString("dni",dni).uniqueResult();
+		
+		
+		if(profesor == null)
+		{
+			throws new UserNotFoundException("UserNotFoundException: el profesor no se encontró");
+		}
+		
+			
+		tx.commit();
+        session.close();
+		return profesor;
+		 */
+		
 		return null;
 	}
 
 	@Override
-	public List<Evaluacion> getEvaluacionesAsignatura(int idAsignatura) {
-		// TODO Auto-generated method stub
+	public List<Evaluacion> getEvaluacionesAsignatura(int idAsignatura) 
+	{
+		/*DEBERIA SER ASI
+		 
+		Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        
+        List<Evaluacion> evaluaciones = session.createQuery("from evaluacion where asig_id = :idAsignatura).setString("idAsignatura",idAsignatura).list();
+		
+		tx.commit();
+        session.close();
+		return evaluaciones;
+		 
+		 */
 		return null;
 	}
 	
