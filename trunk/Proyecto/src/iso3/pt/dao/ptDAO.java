@@ -123,7 +123,6 @@ public class ptDAO implements IptDAO
 	@Override
 	public Set<Evaluacion> getEvaluaciones(int idAsignatura, int idAlumno) 
 	{
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Set<Evaluacion> evaluaciones = new HashSet<Evaluacion>();
         
@@ -137,7 +136,6 @@ public class ptDAO implements IptDAO
         }
         
         tx.commit();
-        session.close();
 		return evaluaciones;
 	}
 
@@ -145,46 +143,34 @@ public class ptDAO implements IptDAO
 
 
 	@Override
-	public void addEvaluacion(String concepto, float nota, int idAsignatura, int idAlumno) {
-		
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
+	public void addEvaluacion(String concepto, float nota, int idAsignatura, int idAlumno) 
+	{
+
         Transaction tx = session.beginTransaction();
         
 		Evaluacion evaluacion = new Evaluacion(concepto, nota);
 		Asignatura asignatura = asignaturas.get(idAsignatura);
 		evaluacion.setAsignatura(asignatura);
 		
-		Alumno alumno = session.createQuery("from Alumno where alum_dni = " + idAlumno).uniqueResult();
+		Alumno alumno =(Alumno) session.createQuery("from Alumno where alum_dni = :idAlumno").setParameter("idAlumno", idAlumno).uniqueResult();
 		evaluacion.setAlumno(alumno);
 		
 		alumno.addEvaluacion(evaluacion);
 		
 		session.flush();
 		tx.commit();
-        session.close();
-		
-		 */
-		
 	}
 
 	@Override
 	public Set<Unidad> getUnidades(int idAsignatura) 
 	{
-		/*DEBERIA SER ASI
-		
 		return asignaturas.get(idAsignatura).getUnidades();
-		
-		 */
-		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Asignatura> getAsignaturas() 
 	{
-		/*DEBERIA SER ASI
-		
 		Set<Asignatura> asigs = new HashSet<Asignatura>();
 		Iterator it = asignaturas.entrySet().iterator();
 		while(it.hasNext()) 
@@ -194,26 +180,19 @@ public class ptDAO implements IptDAO
 			asigs.add(asig);
 		}
 		return asigs;
-		 */
-		return null;
 	}
 
 	@Override
 	public Alumno getAlumno(int id) 
 	{
-		
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
 		
 		Alumno alumno = (Alumno) session.get(Alumno.class,id);
 			
 		tx.commit();
-        session.close();
-        */
-		return null;
+        
+		return alumno;
 	}
 
 	@Override
