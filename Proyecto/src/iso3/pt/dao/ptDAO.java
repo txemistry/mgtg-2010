@@ -80,7 +80,6 @@ public class ptDAO implements IptDAO
 	{
 		session.close();
         sessionFactory.close();
-        
 	}
 	
 	public Map<Integer, Asignatura> getCache()
@@ -97,46 +96,27 @@ public class ptDAO implements IptDAO
 	@Override
 	public Profesor getProfesor(int idAsignatura) 
 	{
-		/*DEBERIA SER ASI
-		 Profesor profesor = asignaturas.get(idAsignatura).getProfesor();
-		 return profesor
-		 */
-		
-        Transaction tx = session.beginTransaction();
-    
-        Integer idProfesor = asignaturas.get(idAsignatura).getProfesor().getId();
-        Profesor profesor = (Profesor) session.get(Profesor.class, idProfesor);
-        
-        tx.commit();
+		Profesor profesor = asignaturas.get(idAsignatura).getProfesor();
 		return profesor;
 	}
 	
 	@Override
 	public Set<Alumno> getAlumnos(int idAsignatura) 
 	{
-		/*DEBERIA SER ASI
-		 return asignatura.get(idAsignatura).getAlumnos();
-		 */
-		
-		Set<Alumno> alumnos = new HashSet<Alumno>();
-		Asignatura asig = asignaturas.get(idAsignatura);
-		alumnos = asig.getAlumnos();
-		return alumnos;
+		return asignaturas.get(idAsignatura).getAlumnos(); 
 	}
 	
 	@Override
 	public Set<Evaluacion> getEvaluacionesOrderedByAsignatura(int idAlumno) 
 	{
-		/*DEBERIA SER ASI
-		Session session = sessionFactory.openSession();
+	
         Transaction tx = session.beginTransaction();
+        List <Evaluacion> listEvaluaciones = session.createQuery("from Evaluacion where alum_dni = :idAlumno order by asig_id desc").setParameter("idAlumno", idAlumno).list();
+
+        tx.commit();
         
-        List <Evaluacion> listEvaluaciones = session.createQuery("from Evaluacion where alum_dni = :idAlumno order by asig_id").list();
         return new HashSet<Evaluacion>(listEvaluaciones);
-        
-		 */
-		
-		return null;
+
 	}
 
 	@SuppressWarnings("unchecked")

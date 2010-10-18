@@ -2,6 +2,7 @@ package iso3.pt.dao;
 
 import iso3.pt.model.Alumno;
 import iso3.pt.model.Asignatura;
+import iso3.pt.model.Evaluacion;
 import iso3.pt.model.Profesor;
 import iso3.pt.model.Unidad;
 
@@ -42,6 +43,43 @@ public class pruebaDAO
 			{
 				System.out.println("               " + uni.toString());
 			}
+		}
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getProfesor");
+		Profesor profe = dao.getProfesor(1);
+		System.out.println(" 	Datos basicos del profesor: " + profe.toString());	
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getAlumnos");
+		Set<Alumno> alumnos = dao.getAlumnos(1);
+		System.out.println("     Datos de los alumnos de una asignatura");
+		for(Alumno al:alumnos)
+		{
+			System.out.println("        " + al.toString());
+		}
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getEvaluacionesOrderBy");
+		Set<Evaluacion> evaluaciones = dao.getEvaluacionesOrderedByAsignatura(33333333);
+		System.out.println("   Datos de las evaluaciones");
+		for(Evaluacion ev:evaluaciones)
+		{
+			System.out.println("        " + ev.toString());
+		}
+		System.out.println();
+		System.out.println();
+		
+		
+		System.out.println("Prueba de getAlumnos");
+		Set<Alumno> alumnoss = dao.getAlumnos(1);
+		System.out.println("     Datos de los alumnos de una asignatura");
+		for(Alumno al:alumnoss)
+		{
+			System.out.println("        " + al.toString());
 		}
 		System.out.println();
 		System.out.println();
