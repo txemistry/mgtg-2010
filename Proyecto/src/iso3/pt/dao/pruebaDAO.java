@@ -74,13 +74,47 @@ public class pruebaDAO
 		System.out.println();
 		
 		
-		System.out.println("Prueba de getAlumnos");
-		Set<Alumno> alumnoss = dao.getAlumnos(1);
-		System.out.println("     Datos de los alumnos de una asignatura");
-		for(Alumno al:alumnoss)
+		System.out.println("Prueba de getEvaluaciones");
+		Set<Evaluacion> evs = dao.getEvaluaciones(1,33333333);
+		System.out.println("     Datos de los alumnos de una evaluacion");
+		for(Evaluacion ev:evs)
 		{
-			System.out.println("        " + al.toString());
+			System.out.println("        " + ev.toString());
 		}
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de addEvaluacion");
+		dao.addEvaluacion("evaluacion 3", (float) 7.0, 1, 33333333);
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getUnidades");
+		Set<Unidad> unidades = dao.getUnidades(1);
+		System.out.println("     Datos de las unidades");
+		for(Unidad uni:unidades)
+		{
+			System.out.println("         " + uni.toString());
+		}
+		System.out.println();
+		System.out.println();
+		
+		
+		System.out.println("Prueba de getAsignaturas");
+		Set<Asignatura> asignaturas = dao.getAsignaturas();
+		System.out.println("     Datos de las asignaturas");
+		for(Asignatura asig:asignaturas)
+		{
+			System.out.println("         " + asig.toString());
+		}
+		System.out.println();
+		System.out.println();
+		
+		
+		System.out.println("Prueba de getAlumno");
+		Alumno alum = dao.getAlumno(33333333);
+		System.out.println("     Datos del alumno");
+		System.out.println("         " + alum.toString());
 		System.out.println();
 		System.out.println();
 		
