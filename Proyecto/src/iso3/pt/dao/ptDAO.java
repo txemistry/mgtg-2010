@@ -26,6 +26,7 @@ public class ptDAO implements IptDAO
 	private Map<Integer, Asignatura> asignaturas = null;
 	private static ptDAO instancia = null;
 	private SessionFactory sessionFactory = null;
+	private Session session = null;
 
 	//********************************************************************************//
 	//********************************************************************************//
@@ -34,6 +35,7 @@ public class ptDAO implements IptDAO
 	private ptDAO()
 	{
 		sessionFactory = new Configuration().configure().buildSessionFactory();
+		session = sessionFactory.openSession();
 		cargarCache();
 	}
     
@@ -66,19 +68,19 @@ public class ptDAO implements IptDAO
 	@SuppressWarnings("unchecked")
 	private List<Asignatura> obtenerAsignaturas()
 	{
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
 		List<Asignatura> listAsig = session.createQuery("from Asignatura").list();
    
         tx.commit();
-        session.close();
         return listAsig;
 	}
 
 	public void close()
 	{
+		session.close();
         sessionFactory.close();
+        
 	}
 	
 	public Map<Integer, Asignatura> getCache()
@@ -100,14 +102,12 @@ public class ptDAO implements IptDAO
 		 return profesor
 		 */
 		
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
     
         Integer idProfesor = asignaturas.get(idAsignatura).getProfesor().getId();
         Profesor profesor = (Profesor) session.get(Profesor.class, idProfesor);
         
         tx.commit();
-        session.close();
 		return profesor;
 	}
 	
