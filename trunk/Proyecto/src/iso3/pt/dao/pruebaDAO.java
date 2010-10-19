@@ -1,5 +1,7 @@
 package iso3.pt.dao;
 
+import iso3.pt.dao.excepciones.IncorrectPasswordException;
+import iso3.pt.dao.excepciones.UserNotFoundException;
 import iso3.pt.model.Alumno;
 import iso3.pt.model.Asignatura;
 import iso3.pt.model.Evaluacion;
@@ -7,6 +9,7 @@ import iso3.pt.model.Profesor;
 import iso3.pt.model.Unidad;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,7 +17,7 @@ public class pruebaDAO
 {
 	
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args) 
+	public static void main(String[] args) throws UserNotFoundException, IncorrectPasswordException 
 	{
 		ptDAO dao = ptDAO.getInstancia();
 		
@@ -84,10 +87,13 @@ public class pruebaDAO
 		System.out.println();
 		System.out.println();
 		
-		System.out.println("Prueba de addEvaluacion");
+		/*Funciona pero es que no ahce mas que meter evaluaciones
+		 * 
+		 * System.out.println("Prueba de addEvaluacion");
 		dao.addEvaluacion("evaluacion 3", (float) 7.0, 1, 33333333);
 		System.out.println();
 		System.out.println();
+		*/
 		
 		System.out.println("Prueba de getUnidades");
 		Set<Unidad> unidades = dao.getUnidades(1);
@@ -117,6 +123,75 @@ public class pruebaDAO
 		System.out.println("         " + alum.toString());
 		System.out.println();
 		System.out.println();
+		
+		System.out.println("Prueba de getAsignatura");
+		Asignatura as = dao.getAsignatura(1);
+		System.out.println(" 	Datos basicos de la asignatura: " + as.toString());	
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de loginAlumno");
+		Alumno alu = dao.loginAlumno(33333333, "3333");
+		System.out.println(" 	Datos de login del alumno: " + alu.toString());	
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getAsignaturasAlumno");
+		Set<Asignatura> asignaturas2 = dao.getAsignaturas(33333333);
+		System.out.println("     Datos de las asignaturas por id alumno");
+		for(Asignatura asig:asignaturas2)
+		{
+			System.out.println("         " + asig.toString());
+		}
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de matricular");
+		dao.matricular(33333333, 2);
+		System.out.println("Matriculado con exito");
+		System.out.println();
+		
+		/*Lo dejo así para que no se desmatricule todo el rato, pero ya he comprobado que funciona bien
+		 * 
+		 * System.out.println("Prueba de desmatricular");
+		dao.desmatricular(33333333, 2);
+		System.out.println("Desmatriculado con exito");
+		System.out.println();*/
+		
+		System.out.println("Prueba de loginProfesor");
+		Profesor prof = dao.loginProfesor(11111111, "1111");
+		System.out.println(" 	Datos de login del profesor: " + prof.toString());	
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getAsignaturasProfesor");
+		Set<Asignatura> asigtas = dao.getAsignaturasProfesor(1);
+		System.out.println("     Datos de las asignaturas por profesor");
+		for(Asignatura asig:asigtas)
+		{
+			System.out.println("         " + asig.toString());
+		}
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getProfesorByDni");
+		Profesor pf = dao.getProfesorByDni(11111111);
+		System.out.println(" 	Datos basicos del profesor por Dni: " + pf.toString());	
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Prueba de getEvaluacionesAsignatura");
+		List<Evaluacion> evas = dao.getEvaluacionesAsignatura(2);
+		System.out.println("     Datos de las evaluaciones por asignatura");
+		Iterator iter = evas.iterator();
+		while (iter.hasNext())
+		{
+		  System.out.println(iter.next());
+		}
+		System.out.println();
+		System.out.println();
+		
+		
 		
 		dao.close();
 		

@@ -198,55 +198,40 @@ public class ptDAO implements IptDAO
 	@Override
 	public Asignatura getAsignatura(int id) 
 	{
-		/*DEBERIA SER ASI
-		
 		return asignaturas.get(id);
-		
-		 */
-		return null;
 	}
 
 	@Override
 	public Alumno loginAlumno(int dni, String pass) throws UserNotFoundException, IncorrectPasswordException 
 	{
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
+		Alumno alumno = (Alumno) session.get(Alumno.class,dni);
+		tx.commit();
 		
-		Alumno alumno = (Alumno) session.get(Alumno.class,id);
 		
 		if(alumno == null)
 		{
-			throws new UserNotFoundException("UserNotFoundException: el usuario no se encontró");
+			throw new UserNotFoundException("UserNotFoundException: el usuario no se encontrï¿½");
 		}
 		else
 		{
-			if(alumno.getPassword.equals(pass))
+			if(alumno.getPassword().equals(pass))
 			{
-				return alumno
+				return alumno;
 			}
 			else
 			{
-				throws new IncorrectPasswordException("IncorrectPasswordException: contraseña incorrecta");
+				throw new IncorrectPasswordException("IncorrectPasswordException: contraseï¿½a incorrecta");
 			}
 		}
 			
-		tx.commit();
-        session.close();
 		
-		 */
-
-		return null;
 	}
 
 	@Override
 	public Set<Asignatura> getAsignaturas(int idAlumno) 
 	{
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
 		
@@ -256,19 +241,13 @@ public class ptDAO implements IptDAO
 		asigs = alumno.getAsignaturas();
 			
 		tx.commit();
-        session.close();
 		return asigs;
-		 */
-		
-		return null;
+
 	}
 
 	@Override
 	public void matricular(int idAlumno, int idAsignatura) 
 	{
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
 		Asignatura asignatura = asignaturas.get(idAsignatura);		
@@ -279,18 +258,12 @@ public class ptDAO implements IptDAO
 		
 		session.flush();
 		tx.commit();
-        session.close();
-		
-		 */
-		
+	
 	}
 
 	@Override
 	public void desmatricular(int idAlumno, int idAsignatura) 
 	{
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
 		Asignatura asignatura = asignaturas.get(idAsignatura);		
@@ -301,51 +274,38 @@ public class ptDAO implements IptDAO
 		
 		session.flush();
 		tx.commit();
-        session.close();
-		
-		 */
 	}
 
 	@Override
 	public Profesor loginProfesor(int dni, String pass) throws UserNotFoundException, IncorrectPasswordException 
 	{
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
+
         Transaction tx = session.beginTransaction();
         
-		
-		Profesor profesor = (Profesor) session.createQuery("from Profesor where prof_dni = :dni).setString("dni",dni).uniqueResult();
-		
+		Profesor profesor = (Profesor) session.createQuery("from Profesor where prof_dni = :dni").setParameter("dni",dni).uniqueResult();
+		tx.commit();
 		
 		if(profesor == null)
 		{
-			throws new UserNotFoundException("UserNotFoundException: el profesor no se encontró");
+			throw new UserNotFoundException("UserNotFoundException: el profesor no se encontrï¿½");
 		}
 		else
 		{
-			if(profesor.getPassword.equals(pass))
+			if(profesor.getPassword().equals(pass))
 			{
 				return profesor;
 			}
 			else
 			{
-				throws new IncorrectPasswordException("IncorrectPasswordException: contraseña incorrecta");
+				throw new IncorrectPasswordException("IncorrectPasswordException: contraseï¿½a incorrecta");
 			}
 		}
 			
-		tx.commit();
-        session.close();
-		
-		 */
-		return null;
 	}
 
 	@Override
 	public Set<Asignatura> getAsignaturasProfesor(int idProfesor) 
 	{
-		/*DEBERIA SER ASI
-		
 		Set<Asignatura> asigs = new HashSet<Asignatura>();
 		
 		Iterator it = asignaturas.entrySet().iterator();
@@ -359,53 +319,38 @@ public class ptDAO implements IptDAO
 		}
 		
 		return asigs;
-		
-		 */
-		return null;
 	}
 
 	@Override
 	public Profesor getProfesorByDni(int dni) throws UserNotFoundException 
 	{
-		/*DEBERIA SER ASI
-		
-		Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         
-		
-		Profesor profesor = (Profesor) session.createQuery("from Profesor where prof_dni = :dni).setString("dni",dni).uniqueResult();
+		Profesor profesor = (Profesor) session.createQuery("from Profesor where prof_dni = :dni").setParameter("dni",dni).uniqueResult();
 		
 		
 		if(profesor == null)
 		{
-			throws new UserNotFoundException("UserNotFoundException: el profesor no se encontró");
+			throw new UserNotFoundException("UserNotFoundException: el profesor no se encontrï¿½");
 		}
 		
 			
 		tx.commit();
-        session.close();
-		return profesor;
-		 */
 		
-		return null;
+		return profesor;
 	}
 
 	@Override
 	public List<Evaluacion> getEvaluacionesAsignatura(int idAsignatura) 
-	{
-		/*DEBERIA SER ASI
-		 
-		Session session = sessionFactory.openSession();
+	{ 
+		        
         Transaction tx = session.beginTransaction();
         
-        List<Evaluacion> evaluaciones = session.createQuery("from evaluacion where asig_id = :idAsignatura).setString("idAsignatura",idAsignatura).list();
-		
-		tx.commit();
-        session.close();
-		return evaluaciones;
-		 
-		 */
-		return null;
+        List <Evaluacion> listEvaluaciones = session.createQuery("from Evaluacion where asig_id = :idAsignatura").setParameter("idAsignatura",idAsignatura).list();
+        tx.commit();
+        
+        return listEvaluaciones;
+
 	}
 	
 }
