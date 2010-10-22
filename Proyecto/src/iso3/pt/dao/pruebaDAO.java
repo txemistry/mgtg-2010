@@ -131,8 +131,18 @@ public class pruebaDAO
 		System.out.println();
 		
 		System.out.println("Prueba de loginAlumno");
-		Alumno alu = dao.loginAlumno(33333333, "3333");
-		System.out.println(" 	Datos de login del alumno: " + alu.toString());	
+		try
+		{
+			Alumno alu = dao.loginAlumno(33333333, "3333");
+			System.out.println(" 	Datos de login del alumno: " + alu.toString());	
+		}
+		catch(Exception e)
+		{
+			if(e.getMessage().contains("IncorrectPasswordException"))
+				System.out.println("Contraseña incorrecta");
+			else
+				System.out.println("El usuario no existe");
+		}
 		System.out.println();
 		System.out.println();
 		
@@ -147,7 +157,7 @@ public class pruebaDAO
 		System.out.println();
 		
 		System.out.println("Prueba de matricular");
-		dao.matricular(33333333, 2);
+		dao.matricular(33333333, 1);
 		System.out.println("Matriculado con exito");
 		System.out.println();
 		
@@ -159,8 +169,18 @@ public class pruebaDAO
 		System.out.println();*/
 		
 		System.out.println("Prueba de loginProfesor");
-		Profesor prof = dao.loginProfesor(11111111, "1111");
-		System.out.println(" 	Datos de login del profesor: " + prof.toString());	
+		try
+		{
+			Profesor prof = dao.loginProfesor(11111111, "1111");
+			System.out.println(" 	Datos de login del profesor: " + prof.toString());	
+		}
+		catch(Exception e)
+		{
+			if(e.getMessage().contains("IncorrectPasswordException"))
+				System.out.println("Contraseña incorrecta");
+			else
+				System.out.println("El Profesor no existe");
+		}
 		System.out.println();
 		System.out.println();
 		

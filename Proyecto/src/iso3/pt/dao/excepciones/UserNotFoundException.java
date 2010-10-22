@@ -6,6 +6,6 @@ public class UserNotFoundException extends Exception
 
 	public UserNotFoundException(String message)
 	{
-		System.err.println(message);
+		super(message);
 	}
 }

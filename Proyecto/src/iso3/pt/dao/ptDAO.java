@@ -212,7 +212,7 @@ public class ptDAO implements IptDAO
 		
 		if(alumno == null)
 		{
-			throw new UserNotFoundException("UserNotFoundException: el usuario no se encontr�");
+			throw new UserNotFoundException("UserNotFoundException");
 		}
 		else
 		{
@@ -222,7 +222,7 @@ public class ptDAO implements IptDAO
 			}
 			else
 			{
-				throw new IncorrectPasswordException("IncorrectPasswordException: contrase�a incorrecta");
+				throw new IncorrectPasswordException("IncorrectPasswordException");
 			}
 		}
 			
