@@ -6,6 +6,6 @@ public class IncorrectPasswordException extends Exception
 
 	public IncorrectPasswordException(String message)
 	{
-		System.err.println(message);
+		super(message);
 	}
 }
