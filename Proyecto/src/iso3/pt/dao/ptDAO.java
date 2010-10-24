@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -106,12 +105,13 @@ public class ptDAO implements IptDAO
 		return asignaturas.get(idAsignatura).getAlumnos(); 
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Evaluacion> getEvaluacionesOrderedByAsignatura(int idAlumno) 
 	{
 	
         Transaction tx = session.beginTransaction();
-        List <Evaluacion> listEvaluaciones = session.createQuery("from Evaluacion where alum_dni = :idAlumno order by asig_id desc").setParameter("idAlumno", idAlumno).list();
+        List <Evaluacion> listEvaluaciones = session.createQuery("from Evaluacion where alum_dni = :idAlumno order by asig_id asc").setParameter("idAlumno", idAlumno).list();
 
         tx.commit();
         
@@ -119,7 +119,6 @@ public class ptDAO implements IptDAO
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Evaluacion> getEvaluaciones(int idAsignatura, int idAlumno) 
 	{
@@ -167,7 +166,7 @@ public class ptDAO implements IptDAO
 		return asignaturas.get(idAsignatura).getUnidades();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Set<Asignatura> getAsignaturas() 
 	{
@@ -303,6 +302,7 @@ public class ptDAO implements IptDAO
 			
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Set<Asignatura> getAsignaturasProfesor(int idProfesor) 
 	{
@@ -340,6 +340,7 @@ public class ptDAO implements IptDAO
 		return profesor;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Evaluacion> getEvaluacionesAsignatura(int idAsignatura) 
 	{ 

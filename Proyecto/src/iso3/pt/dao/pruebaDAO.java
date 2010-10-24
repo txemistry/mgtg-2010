@@ -16,7 +16,7 @@ import java.util.Set;
 public class pruebaDAO 
 {
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) throws UserNotFoundException, IncorrectPasswordException 
 	{
 		ptDAO dao = ptDAO.getInstancia();
@@ -67,7 +67,7 @@ public class pruebaDAO
 		System.out.println();
 		
 		System.out.println("Prueba de getEvaluacionesOrderBy");
-		Set<Evaluacion> evaluaciones = dao.getEvaluacionesOrderedByAsignatura(33333333);
+		Set<Evaluacion> evaluaciones = dao.getEvaluacionesOrderedByAsignatura(56712038);
 		System.out.println("   Datos de las evaluaciones");
 		for(Evaluacion ev:evaluaciones)
 		{
@@ -78,8 +78,8 @@ public class pruebaDAO
 		
 		
 		System.out.println("Prueba de getEvaluaciones");
-		Set<Evaluacion> evs = dao.getEvaluaciones(1,33333333);
-		System.out.println("     Datos de los alumnos de una evaluacion");
+		Set<Evaluacion> evs = dao.getEvaluaciones(2,78653209);
+		System.out.println("     Datos de las evaluaciones de un alumno");
 		for(Evaluacion ev:evs)
 		{
 			System.out.println("        " + ev.toString());
@@ -118,14 +118,14 @@ public class pruebaDAO
 		
 		
 		System.out.println("Prueba de getAlumno");
-		Alumno alum = dao.getAlumno(33333333);
+		Alumno alum = dao.getAlumno(78653209);
 		System.out.println("     Datos del alumno");
 		System.out.println("         " + alum.toString());
 		System.out.println();
 		System.out.println();
 		
 		System.out.println("Prueba de getAsignatura");
-		Asignatura as = dao.getAsignatura(1);
+		Asignatura as = dao.getAsignatura(2);
 		System.out.println(" 	Datos basicos de la asignatura: " + as.toString());	
 		System.out.println();
 		System.out.println();
@@ -133,7 +133,7 @@ public class pruebaDAO
 		System.out.println("Prueba de loginAlumno");
 		try
 		{
-			Alumno alu = dao.loginAlumno(33333333, "3333");
+			Alumno alu = dao.loginAlumno(78653209, "1111");
 			System.out.println(" 	Datos de login del alumno: " + alu.toString());	
 		}
 		catch(Exception e)
@@ -147,7 +147,7 @@ public class pruebaDAO
 		System.out.println();
 		
 		System.out.println("Prueba de getAsignaturasAlumno");
-		Set<Asignatura> asignaturas2 = dao.getAsignaturas(33333333);
+		Set<Asignatura> asignaturas2 = dao.getAsignaturas(56712038);
 		System.out.println("     Datos de las asignaturas por id alumno");
 		for(Asignatura asig:asignaturas2)
 		{
@@ -157,7 +157,7 @@ public class pruebaDAO
 		System.out.println();
 		
 		System.out.println("Prueba de matricular");
-		dao.matricular(33333333, 1);
+		dao.matricular(56712038, 1);
 		System.out.println("Matriculado con exito");
 		System.out.println();
 		
@@ -171,7 +171,7 @@ public class pruebaDAO
 		System.out.println("Prueba de loginProfesor");
 		try
 		{
-			Profesor prof = dao.loginProfesor(11111111, "1111");
+			Profesor prof = dao.loginProfesor(76519434, "2222");
 			System.out.println(" 	Datos de login del profesor: " + prof.toString());	
 		}
 		catch(Exception e)
@@ -195,7 +195,7 @@ public class pruebaDAO
 		System.out.println();
 		
 		System.out.println("Prueba de getProfesorByDni");
-		Profesor pf = dao.getProfesorByDni(11111111);
+		Profesor pf = dao.getProfesorByDni(76519434);
 		System.out.println(" 	Datos basicos del profesor por Dni: " + pf.toString());	
 		System.out.println();
 		System.out.println();
