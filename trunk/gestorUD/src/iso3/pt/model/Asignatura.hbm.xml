@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="iso3.pt.model.Asignatura" table="ASIGNATURA">
+	
+		<id name="id" column="ASIG_ID">
+			<generator class="native" />
+		</id>
+		
+		<property name="codigo" column="ASIG_COD" not-null="true" unique="true" />
+		<property name="nombre" column="ASIG_NOM" not-null="true" />
+		<property name="creditos" column="ASIG_CRED" />
+	
+		<many-to-one name="profesor" column="ASIG_PROF" />
+		
+		<set name="unidades" lazy="true" cascade="all">
+			<key column="ASIG_ID" />
+			<one-to-many class="iso3.pt.model.Unidad" />
+		</set>
+		
+		<set name="alumnos" table="MATRICULACIONES" lazy="true" inverse="true">
+			<key column="ASIG_ID" />
+			<many-to-many column="ALUM_DNI" class="iso3.pt.model.Alumno" />
+		</set>
+	
+	</class>
+			
+		
+</hibernate-mapping>
