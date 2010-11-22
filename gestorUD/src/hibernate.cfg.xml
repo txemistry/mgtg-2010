@@ -6,9 +6,9 @@
     <session-factory>
 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/mgtgdb</property>
-        <property name="hibernate.connection.username">mgtg</property>
-        <property name="hibernate.connection.password">mgtg</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/ptDB</property>
+        <property name="hibernate.connection.username">eside</property>
+        <property name="hibernate.connection.password">eside</property>
         
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hbm2ddl.auto">update</property>
