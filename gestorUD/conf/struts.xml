@@ -19,6 +19,7 @@
 			<result  name="listStudentSubjects">/jsp/studentSubjects.jsp</result>
 			<result  name="listLecturerSubjects">/jsp/lecturerSubjects.jsp</result>
         </action>
+        
 		
 	</package>
 </struts>
