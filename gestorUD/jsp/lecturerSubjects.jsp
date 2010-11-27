@@ -21,6 +21,31 @@
 			</tr>
 		</table>
 		
+		<table class="borderAll">
+			<tr>
+				<th><s:text name="tabla.subject.codigo"/></th>
+				<th><s:text name="tabla.subject.nombre"/></th>
+				<th><s:text name="tabla.subject.creditos"/></th>
+				<th><s:text name="tabla.subject.profesor"/></th>
+				<th><s:text name="tabla.subject.listado"/></th>
+				<th><s:text name="tabla.subject.alumnos"/></th>
+				<th>&nbsp;&nbsp;</th>
+			</tr>
+			<s:iterator value="asignaturas" status="status">
+		        <tr class="<s:if test="#status.even">even</s:if><s:else>odd</s:else>">
+		            <td class="nowrap"><s:property value="%{ codigo }"/></td>
+		            <td class="nowrap"><s:property value="%{ nombre }"/></td>
+		            <td class="nowrap"><s:property value="%{ creditos }"/></td>
+		            <td class="nowrap"><s:property value="#session.nombre"/></td>
+		            <td class="nowrap"><s:property value="%{ unidades.size }"/></td>
+		            <td class="nowrap"><s:property value="%{ alumnos.size }"/></td>
+		            <s:url id="urlDetails" action="verDetalles" escapeAmp="false"/>
+		            <td class="nowrap"><a href="<s:property value="#urlDetails"/>"><s:text name="label.ver.estudiantes"/></a></td>
+		        </tr>
+		    </s:iterator>
+		</table>
+			
+		
 
 		
 	</body>

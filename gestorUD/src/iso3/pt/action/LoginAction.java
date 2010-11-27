@@ -1,19 +1,13 @@
 package iso3.pt.action;
 
 
-import iso3.pt.dao.excepciones.IncorrectPasswordException;
-import iso3.pt.dao.excepciones.UserNotFoundException;
 import iso3.pt.model.Alumno;
-import iso3.pt.model.Profesor;
 import iso3.pt.model.Asignatura;
+import iso3.pt.model.Profesor;
 import iso3.pt.service.PtDaoService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.struts2.components.ActionError;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,6 +21,7 @@ public class LoginAction extends ActionSupport implements Preparable
 	private String username;
 	private String password;
 	private String userType;
+	private Set<Asignatura> asignaturas = null;
 
 	
 	
@@ -61,7 +56,19 @@ public class LoginAction extends ActionSupport implements Preparable
 	{
 		this.userType = userType;
 	}
+	
 
+	public Set<Asignatura> getAsignaturas() 
+	{
+		return asignaturas;
+	}
+
+	public void setAsignaturas(Set<Asignatura> asignaturas) 
+	{
+		this.asignaturas = asignaturas;
+	}
+
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String login()
 	{
@@ -78,8 +85,7 @@ public class LoginAction extends ActionSupport implements Preparable
 				
 				//Ahora creamos la lista de asignaturas del estudiante
 				//para dejarselas preparadas al jsp 
-				@SuppressWarnings("unused")
-				Set<Asignatura> asignaturasEstudiante = (Set<Asignatura>) dao.getAsignatura(alumno.getDni());
+				this.asignaturas = (Set<Asignatura>) dao.getAsignatura(alumno.getDni());
 				
 				return "listStudentSubjects";
 			} 
@@ -110,7 +116,7 @@ public class LoginAction extends ActionSupport implements Preparable
 				//Ahora creamos la lista de asignaturas del profesor
 				//para dejarselas preparadas al jsp 
 				int id = (Integer)ActionContext.getContext().getSession().get("id");
-				Set<Asignatura> asignaturasProfesor = (Set<Asignatura>) dao.getAsignaturasProfesor(id);
+				this.asignaturas = (Set<Asignatura>) dao.getAsignaturasProfesor(id);
 				
 				return "listLecturerSubjects";
 			} 
