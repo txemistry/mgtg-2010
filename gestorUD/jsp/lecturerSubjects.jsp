@@ -15,7 +15,7 @@
 		<table>
 			<tr>
 				<td>
-					<s:url id="urlLogout" action="login!logout" escapeAmp="false"/>
+					<s:url id="urlLogout" action="logout" escapeAmp="false"/>
 					<a href="<s:property value="#urlLogout"/>"><s:text name="label.logout"/></a>
 				</td>
 			</tr>
