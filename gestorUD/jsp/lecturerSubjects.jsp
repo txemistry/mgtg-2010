@@ -21,6 +21,8 @@
 			</tr>
 		</table>
 		
+		<p> </P>
+		
 		<table class="borderAll">
 			<tr>
 				<th><s:text name="tabla.subject.codigo"/></th>
@@ -39,14 +41,11 @@
 		            <td class="nowrap"><s:property value="#session.nombre"/></td>
 		            <td class="nowrap"><s:property value="%{ unidades.size }"/></td>
 		            <td class="nowrap"><s:property value="%{ alumnos.size }"/></td>
-		            <s:url id="urlDetails" action="verDetalles" escapeAmp="false"/>
-		            <td class="nowrap"><a href="<s:property value="#urlDetails"/>"><s:text name="label.ver.estudiantes"/></a></td>
+		            <s:url id="urlVerEstudiantes" action="verDetalles" escapeAmp="false"/>
+		            <td class="nowrap"><a href="<s:property value="#urlVerEstudiantes"/>"><s:text name="label.ver.estudiantes"/></a></td>
 		        </tr>
 		    </s:iterator>
 		</table>
-			
-		
-
 		
 	</body>
 
