@@ -87,7 +87,7 @@ public class LoginAction extends ActionSupport implements Preparable
 				
 				//Ahora creamos la lista de asignaturas del estudiante
 				//para dejarselas preparadas al jsp 
-				this.asignaturas = (Set<Asignatura>) dao.getAsignatura(alumno.getDni());
+				this.asignaturas = (Set<Asignatura>) dao.getAsignaturas(alumno.getDni());
 				
 				return "listStudentSubjects";
 			} 
