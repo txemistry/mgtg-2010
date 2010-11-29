@@ -24,6 +24,10 @@
         	<result name="success" type="chain">showLogin</result>
         </action>
         
+        <action name="estudiante" class="iso3.pt.action.StudentAction">
+        	<result name="success">/jsp/error.jsp</result>
+        </action>
+        
 		
 	</package>
 </struts>
