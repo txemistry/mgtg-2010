@@ -52,7 +52,9 @@
 		            <td class="nowrap"><s:property value="%{ alumnos.size }"/></td>
 		            <s:url id="urlDesmatricular" action="estudiante!desmatricular" escapeAmp="false"/>
 		            <td class="nowrap"><a href="<s:property value="#urlDesmatricular"/>"><s:text name="label.desmatricular"/></a></td>
-		            <s:url id="urlVerNotas" action="estudiante!verNotas" escapeAmp="false"/>
+		            <s:url id="urlVerNotas" action="estudiante!verNotas" escapeAmp="false">
+		            	<s:param name="Asignatura.codigo" value="Asignatura.codigo"/>
+		            </s:url>
 		            <td class="nowrap"><a href="<s:property value="#urlVerNotas"/>"><s:text name="label.ver.notas"/></a></td>
 		        </tr>
 		    </s:iterator>

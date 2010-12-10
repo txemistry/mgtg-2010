@@ -22,5 +22,6 @@ public class StudentAction extends ActionSupport
 	
 	public String verNotas()
 	{
-		return null;}
+		return null;
+	}
 }
