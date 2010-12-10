@@ -16,8 +16,14 @@
 			<result  name="success">/jsp/login.jsp</result>
             <result  name="input">/jsp/login.jsp</result>
 			<result  name="error">/jsp/error.jsp</result>
-			<result  name="listStudentSubjects">/jsp/studentSubjects.jsp</result>
-			<result  name="listLecturerSubjects">/jsp/lecturerSubjects.jsp</result>
+			<result  name="listStudentSubjects" type="chain">
+				<param name="actionName">estudiante</param>
+				<param name="method">obtenerListaAsignaturas</param>
+			</result>
+			<result  name="listLecturerSubjects" type="chain">
+				<param name="actionName">profesor</param>
+				<param name="method">obtenerListaAsignaturas</param>
+			</result>
         </action>
         
         <action name="logout" class="iso3.pt.action.LogoutAction" method="logout">
@@ -26,13 +32,12 @@
         
         <action name="estudiante" class="iso3.pt.action.StudentAction">
         	<result name="success">/jsp/error.jsp</result>
+        	<result name="listadoAsignaturas">/jsp/studentSubjects.jsp</result>
         </action>
         
         <action name="profesor" class="iso3.pt.action.LecturerAction">
-        	<result name="estudiantesCargados">/jsp/subjectStudents.jsp</result>
-        	<result name="volverAAsignaturasProfesor">/jsp/lecturerSubjects.jsp</result>
-        	
-        	
+        	<result name="listadoEstudiantes">/jsp/subjectStudents.jsp</result>
+        	<result name="listadoAsignaturas">/jsp/lecturerSubjects.jsp</result>
         </action>
         
 		
