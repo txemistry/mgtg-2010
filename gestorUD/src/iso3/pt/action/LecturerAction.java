@@ -47,11 +47,11 @@ public class LecturerAction extends ActionSupport
 		this.asignaturas = asignaturas;
 	}
 
-	public String verEstudiantes()
+	public String obtenerListaEstudiantes()
 	{
 		PtDaoService dao = new PtDaoService();
 		alumnos = dao.getAlumnos(asignatura);
-		return "estudiantesCargados";
+		return "listadoEstudiantes";
 	}
 	
 	public String anyadirNota()
@@ -65,7 +65,7 @@ public class LecturerAction extends ActionSupport
 		PtDaoService dao = new PtDaoService();
 		int id = (Integer)ActionContext.getContext().getSession().get("id");
 		this.asignaturas = (Set<Asignatura>) dao.getAsignaturasProfesor(id);
-		return "volverAAsignaturasProfesor";
+		return "listadoAsignaturas";
 	}
 
 }

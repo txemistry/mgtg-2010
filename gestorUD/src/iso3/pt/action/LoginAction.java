@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
-public class LoginAction extends ActionSupport implements Preparable
+public class LoginAction extends ActionSupport 
 {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +23,6 @@ public class LoginAction extends ActionSupport implements Preparable
 	private String username;
 	private String password;
 	private String userType;
-	private Set<Asignatura> asignaturas = null;
 
 	
 	
@@ -60,16 +59,6 @@ public class LoginAction extends ActionSupport implements Preparable
 	}
 	
 
-	public Set<Asignatura> getAsignaturas() 
-	{
-		return asignaturas;
-	}
-
-	public void setAsignaturas(Set<Asignatura> asignaturas) 
-	{
-		this.asignaturas = asignaturas;
-	}
-
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String login()
@@ -85,9 +74,6 @@ public class LoginAction extends ActionSupport implements Preparable
 				session.put("dni", alumno.getDni());
 				session.put("nombre", alumno.getNombre());
 				
-				//Ahora creamos la lista de asignaturas del estudiante
-				//para dejarselas preparadas al jsp 
-				this.asignaturas = (Set<Asignatura>) dao.getAsignaturas(alumno.getDni());
 				
 				return "listStudentSubjects";
 			} 
@@ -115,11 +101,6 @@ public class LoginAction extends ActionSupport implements Preparable
 				session.put("nombre", profesor.getNombre());
 				session.put("dni", profesor.getDni());
 				
-				//Ahora creamos la lista de asignaturas del profesor
-				//para dejarselas preparadas al jsp 
-				int id = (Integer)ActionContext.getContext().getSession().get("id");
-				this.asignaturas = (Set<Asignatura>) dao.getAsignaturasProfesor(id);
-				
 				return "listLecturerSubjects";
 			} 
 			catch (Exception e) 
@@ -144,10 +125,5 @@ public class LoginAction extends ActionSupport implements Preparable
 		return SUCCESS;
 	}
 
-	@Override
-	public void prepare() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
