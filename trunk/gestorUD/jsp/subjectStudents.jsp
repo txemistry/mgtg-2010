@@ -4,13 +4,13 @@
 
 	<head>
 	    <link href="<s:url value='/css/main.css'/>" rel="stylesheet" type="text/css"/>
-	   	<title><s:text name="label.estudiantes.asignatura"/> <s:property value="#session.nombre"/> <s:text name="label.para"/></title>
+	   	<title><s:text name="label.estudiantes.asignatura"/> "<s:property value="#session.nombre"/>" "<s:text name="label.para"/>"</title>
 
 	</head>
 	
 	<body>
 		<div class="titleDiv"><s:text name="application.title"/></div>
-		<h1><s:text name="label.estudiantes.asignatura"/> <s:property value="#session.nombre"/> <s:text name="label.para"/></h1>
+		<h1><s:text name="label.estudiantes.asignatura"/> "<s:property value="#session.nombre"/>" <s:text name="label.para"/> "<s:property value="nomAsignatura"/>"</h1>
 		
 		
 		
@@ -28,17 +28,18 @@
 		            <td class="nowrap"><s:property value="%{ dni }"/></td>
 		            <td class="nowrap"><s:property value="%{ nombre }"/></td>
 		            <td class="nowrap"><s:property value="%{ telefono }"/></td>
-		            <s:url id="urlAnyadirNota" action="profesor!anyadirNota" escapeAmp="false">
-		            	<s:param name="Asignatura.codigo" value="Asignatura.codigo"/>
+		            <s:url id="urlPrepCalificar" action="profesor!prepCalificar" escapeAmp="false">
+		            	<s:param name="dniAlumno" value="%{ dni }"/>
+		            	<s:param name="idAsignatura" value="idAsignatura"/>
 		            </s:url>
-		            <td class="nowrap"><a href="<s:property value="#urlAnyadirNota"/>"><s:text name="label.ver.estudiantes"/></a></td>
+		            <td class="nowrap"><a href="<s:property value="#urlPrepCalificar"/>"><s:text name="label.anyadir.nota"/></a></td>
 		        </tr>
 		    </s:iterator>
 		</table>
 		
 		<s:form action="profesor!obtenerListaAsignaturas" method="POST">
 			
-			<s:submit value="%{getText('label.login.button')}" align="center"/>
+			<s:submit value="%{getText('label.cancel.button')}" align="center"/>
 			
 		</s:form>
 		

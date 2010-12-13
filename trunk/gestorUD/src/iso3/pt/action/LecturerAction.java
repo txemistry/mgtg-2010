@@ -12,20 +12,66 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LecturerAction extends ActionSupport 
 {
-	private Integer asignatura;
+	private Integer idAsignatura;
+	private String nomAsignatura;
 	private Set<Alumno> alumnos;
 	private Set<Asignatura> asignaturas;
+	private Asignatura asignatura;
+	private Alumno alumno;
+	private int dniAlumno;
 	
 	
 
-	public int getAsignatura() 
+	public int getDniAlumno() {
+		return dniAlumno;
+	}
+
+	public void setDniAlumno(int dniAlumno) {
+		this.dniAlumno = dniAlumno;
+	}
+
+	public void setIdAsignatura(Integer idAsignatura) {
+		this.idAsignatura = idAsignatura;
+	}
+
+	public Asignatura getAsignatura() 
 	{
 		return asignatura;
 	}
 
-	public void setAsignatura(int asignatura) 
+	public void setAsignatura(Asignatura asignatura) 
 	{
 		this.asignatura = asignatura;
+	}
+
+	public Alumno getAlumno() 
+	{
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno)
+	{
+		this.alumno = alumno;
+	}
+
+	public String getNomAsignatura() 
+	{
+		return nomAsignatura;
+	}
+
+	public void setNomAsignatura(String nomAsignatura) 
+	{
+		this.nomAsignatura = nomAsignatura;
+	}
+
+	public int getIdAsignatura() 
+	{
+		return idAsignatura;
+	}
+
+	public void setIdAsignatura(int idAsignatura) 
+	{
+		this.idAsignatura = idAsignatura;
 	}
 
 	public Set<Alumno> getAlumnos() 
@@ -50,14 +96,22 @@ public class LecturerAction extends ActionSupport
 	public String obtenerListaEstudiantes()
 	{
 		PtDaoService dao = new PtDaoService();
-		alumnos = dao.getAlumnos(asignatura);
+		alumnos = dao.getAlumnos(idAsignatura);
 		return "listadoEstudiantes";
 	}
 	
-	public String anyadirNota()
+	public String calificar()
 	{
 		return null;
 		
+	}
+	
+	public String prepCalificar()
+	{
+		PtDaoService dao =  new PtDaoService();
+		asignatura = dao.getAsignatura(this.idAsignatura);
+		alumno = dao.getAlumno(this.dniAlumno);
+		return "listoParaCalificar";
 	}
 	
 	public String obtenerListaAsignaturas()

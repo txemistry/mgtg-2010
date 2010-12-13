@@ -38,6 +38,7 @@
         <action name="profesor" class="iso3.pt.action.LecturerAction">
         	<result name="listadoEstudiantes">/jsp/subjectStudents.jsp</result>
         	<result name="listadoAsignaturas">/jsp/lecturerSubjects.jsp</result>
+        	<result name="listoParaCalificar">/jsp/studentSubjectMarkingForm.jsp</result>
         </action>
         
 		
