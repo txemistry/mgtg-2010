@@ -42,7 +42,8 @@
 		            <td class="nowrap"><s:property value="%{ unidades.size }"/></td>
 		            <td class="nowrap"><s:property value="%{ alumnos.size }"/></td>
 		            <s:url id="urlVerEstudiantes" action="profesor!obtenerListaEstudiantes" escapeAmp="false">
-		            	<s:param name="asignatura" value="%{ id }"/>
+		            	<s:param name="idAsignatura" value="%{ id }"/>
+		            	<s:param name="nomAsignatura" value="%{ nombre }"/>
 		            </s:url>
 		            <td class="nowrap"><a href="<s:property value="#urlVerEstudiantes"/>"><s:text name="label.ver.estudiantes"/></a></td>
 		        </tr>
