@@ -20,7 +20,7 @@
 				</td>
 				<td>
 					<s:url id="urlNotas" action="estudiante!mostrarNotas" escapeAmp="false"/>
-					<a href="<s:property value="#urlMatricula"/>"><s:text name="label.matricular"/></a>
+					<a href="<s:property value="#urlMatricula"/>"><s:text name="label.mostrar"/></a>
 				</td>
 				<td>
 					<s:url id="urlLogout" action="logout" escapeAmp="false"/>
