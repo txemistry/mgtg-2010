@@ -19,6 +19,28 @@ public class LecturerAction extends ActionSupport
 	private Asignatura asignatura;
 	private Alumno alumno;
 	private int dniAlumno;
+	private int hiddenIdAsignatura;
+	private int hiddenDniAlumno;
+	
+	public int getHiddenIdAsignatura() 
+	{
+		return hiddenIdAsignatura;
+	}
+
+	public void setHiddenIdAsignatura(int hiddenIdAsignatura) 
+	{
+		this.hiddenIdAsignatura = hiddenIdAsignatura;
+	}
+
+	public int getHiddenDniAlumno() 
+	{
+		return hiddenDniAlumno;
+	}
+
+	public void setHiddenDniAlumno(int hiddenDniAlumno) 
+	{
+		this.hiddenDniAlumno = hiddenDniAlumno;
+	}
 	
 	
 
@@ -111,6 +133,12 @@ public class LecturerAction extends ActionSupport
 		PtDaoService dao =  new PtDaoService();
 		asignatura = dao.getAsignatura(this.idAsignatura);
 		alumno = dao.getAlumno(this.dniAlumno);
+		this.hiddenDniAlumno=this.dniAlumno;
+		this.hiddenIdAsignatura=this.idAsignatura;
+		
+		System.out.println("el hdni en lecturer es: " + hiddenDniAlumno);
+		System.out.println("el hidasig en lecturer es: " + hiddenIdAsignatura);
+		
 		return "listoParaCalificar";
 	}
 	
