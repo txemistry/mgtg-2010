@@ -39,6 +39,15 @@
         	<result name="listadoEstudiantes">/jsp/subjectStudents.jsp</result>
         	<result name="listadoAsignaturas">/jsp/lecturerSubjects.jsp</result>
         	<result name="listoParaCalificar">/jsp/studentSubjectMarkingForm.jsp</result>
+        	
+        </action>
+        
+        <action name="calificar" class="iso3.pt.action.MarkingAction">
+        	<result name="input">/jsp/studentSubjectMarkingForm.jsp</result>
+        	<result name="success">/jsp/studentSubjectMarkingForm.jsp</result>
+        	<result name="error">/jsp/studentSubjectMarkingForm.jsp</result>
+        	<result name="calificado">/jsp/studentSubjectMarks.jsp</result>
+        	
         </action>
         
 		
