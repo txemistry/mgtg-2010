@@ -33,6 +33,12 @@
         <action name="estudiante" class="iso3.pt.action.StudentAction">
         	<result name="success">/jsp/error.jsp</result>
         	<result name="listadoAsignaturas">/jsp/studentSubjects.jsp</result>
+        	<result name="listadoAsignaturasMatricular">/jsp/studentSubjectRegistrationForm.jsp</result>
+        	<result name="input">/jsp/studentSubjectRegistrationForm.jsp</result>
+        	<result name="matriculado" type="chain">
+        		<param name="actionName">estudiante</param>
+				<param name="method">obtenerListaAsignaturas</param>
+        	</result>
         </action>
         
         <action name="profesor" class="iso3.pt.action.LecturerAction">

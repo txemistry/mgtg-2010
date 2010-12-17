@@ -55,7 +55,7 @@
 		&nbsp
 		&nbsp
 		
-		<s:form  action="calificar!prepCalificar" method="POST">
+		<s:form  action="calificar!calificar" method="POST">
 		
 			<s:hidden name="hiddenIdAsignatura"/>
 			<s:hidden name="hiddenDniAlumno"/>

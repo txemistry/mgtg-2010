@@ -15,7 +15,7 @@
 		<table>
 			<tr>
 				<td>
-					<s:url id="urlMatricula" action="estudiante!matricular" escapeAmp="false"/>
+					<s:url id="urlMatricula" action="estudiante!prepMatricular" escapeAmp="false"/>
 					<a href="<s:property value="#urlMatricula"/>"><s:text name="label.matricular"/></a>
 				</td>
 				<td>
