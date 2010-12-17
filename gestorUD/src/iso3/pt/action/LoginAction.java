@@ -118,12 +118,5 @@ public class LoginAction extends ActionSupport
 			}
 		}
 	}
-	
-	public String logout()
-	{
-		ActionContext.getContext().getSession().clear();
-		return SUCCESS;
-	}
-
 
 }

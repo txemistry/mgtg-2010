@@ -122,11 +122,6 @@ public class LecturerAction extends ActionSupport
 		return "listadoEstudiantes";
 	}
 	
-	public String calificar()
-	{
-		return null;
-		
-	}
 	
 	public String prepCalificar()
 	{
@@ -134,11 +129,7 @@ public class LecturerAction extends ActionSupport
 		asignatura = dao.getAsignatura(this.idAsignatura);
 		alumno = dao.getAlumno(this.dniAlumno);
 		this.hiddenDniAlumno=this.dniAlumno;
-		this.hiddenIdAsignatura=this.idAsignatura;
-		
-		System.out.println("el hdni en lecturer es: " + hiddenDniAlumno);
-		System.out.println("el hidasig en lecturer es: " + hiddenIdAsignatura);
-		
+		this.hiddenIdAsignatura=this.idAsignatura;		
 		return "listoParaCalificar";
 	}
 	

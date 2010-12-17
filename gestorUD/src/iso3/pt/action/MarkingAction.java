@@ -117,7 +117,7 @@ public class MarkingAction extends ActionSupport implements Preparable
 
 
 
-	public String prepCalificar()
+	public String calificar()
 	{		
 		PtDaoService dao =  new PtDaoService();
 		dao.addEvaluacion(concepto, Float.valueOf(nota).floatValue(), idAsignatura, dniAlumno);
