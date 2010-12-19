@@ -89,7 +89,7 @@ public class Test
 		Transaction tx = session.beginTransaction();
 		
 		//creo los profesores y los guardo en la BD
-		Profesor prof1 = new Profesor(45821905, "1111", "Diego López de Ipiña", "944678535", "dipina@deusto.es", "DeustoTech");
+		Profesor prof1 = new Profesor(45821905, "1111", "Diego LÃ³pez de IpiÃ±a", "944678535", "dipina@deusto.es", "DeustoTech");
 		Profesor prof2 = new Profesor(76519434, "2222", "Roberto Carballedo", "944673909", "carballedo@deusto.es", "567");
 		
 		
@@ -119,7 +119,7 @@ public class Test
 		Unidad unidad1 = new Unidad("ISO3-T1", "Introduccion", "Introduccion");
 		Unidad unidad2 = new Unidad("ISO3-T2", "Hibernate", "Persistencia");
 		Unidad unidad3 = new Unidad("IA-T1", "Introduccion", "Introduccion");
-		Unidad unidad4 = new Unidad("IA-T2", "Euristicas", "Euristicas de diseño");
+		Unidad unidad4 = new Unidad("IA-T2", "Euristicas", "Euristicas de diseÃ±o");
 
 		
 		//Vinculo las asignaturas a los alumnos LISTO
