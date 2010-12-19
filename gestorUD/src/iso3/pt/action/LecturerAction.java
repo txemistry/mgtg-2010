@@ -12,6 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LecturerAction extends ActionSupport 
 {
+	
 	private Integer idAsignatura;
 	private String nomAsignatura;
 	private Set<Alumno> alumnos;
