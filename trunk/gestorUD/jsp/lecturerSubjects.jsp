@@ -39,7 +39,10 @@
 		            <td class="nowrap"><s:property value="%{ nombre }"/></td>
 		            <td class="nowrap"><s:property value="%{ creditos }"/></td>
 		            <td class="nowrap"><s:property value="#session.nombre"/></td>
-		            <td class="nowrap"><s:property value="%{ unidades.size }"/></td>
+		            <s:url id="urlVerUnidades" action="unidad!obtenerListaUnidades" escapeAmp="false">
+		            	<s:param name="idAsignatura" value="%{ id }"/>
+		            </s:url>
+		            <td class="nowrap"><a href="<s:property value="#urlVerUnidades"/>"><s:property value="%{ unidades.size }"/></td>
 		            <td class="nowrap"><s:property value="%{ alumnos.size }"/></td>
 		            <s:url id="urlVerEstudiantes" action="profesor!obtenerListaEstudiantes" escapeAmp="false">
 		            	<s:param name="idAsignatura" value="%{ id }"/>

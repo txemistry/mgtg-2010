@@ -20,7 +20,7 @@
 				</td>
 				<td>
 					<s:url id="urlNotas" action="estudiante!mostrarNotas" escapeAmp="false"/>
-					<a href="<s:property value="#urlMatricula"/>"><s:text name="label.mostrar"/></a>
+					<a href="<s:property value="#urlNotas"/>"><s:text name="label.mostrar"/></a>
 				</td>
 				<td>
 					<s:url id="urlLogout" action="logout" escapeAmp="false"/>
@@ -48,12 +48,16 @@
 		            <td class="nowrap"><s:property value="%{ nombre }"/></td>
 		            <td class="nowrap"><s:property value="%{ creditos }"/></td>
 		            <td class="nowrap"><s:property value="%{ profesor.nombre }"/></td>
-		            <td class="nowrap"><s:property value="%{ unidades.size }"/></td>
-		            <td class="nowrap"><s:property value="%{ alumnos.size }"/></td>
-		            <s:url id="urlDesmatricular" action="estudiante!desmatricular" escapeAmp="false"/>
+					<s:url id="urlVerUnidades" action="unidad!obtenerListaUnidades" escapeAmp="false">
+		            	<s:param name="idAsignatura" value="%{ id }"/>
+		            </s:url>
+		            <td class="nowrap"><a href="<s:property value="#urlVerUnidades"/>"><s:property value="%{ unidades.size }"/></td>		            <td class="nowrap"><s:property value="%{ alumnos.size }"/></td>
+		            <s:url id="urlDesmatricular" action="estudiante!desmatricular" escapeAmp="false">
+		            	<s:param name="idAsignatura" value="%{ id }"/>
+		            </s:url>
 		            <td class="nowrap"><a href="<s:property value="#urlDesmatricular"/>"><s:text name="label.desmatricular"/></a></td>
 		            <s:url id="urlVerNotas" action="estudiante!verNotas" escapeAmp="false">
-		            	<s:param name="Asignatura.codigo" value="Asignatura.codigo"/>
+		            	<s:param name="idAsignatura" value="%{ id }"/>
 		            </s:url>
 		            <td class="nowrap"><a href="<s:property value="#urlVerNotas"/>"><s:text name="label.ver.notas"/></a></td>
 		        </tr>
