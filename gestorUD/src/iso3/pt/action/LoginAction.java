@@ -73,6 +73,7 @@ public class LoginAction extends ActionSupport
 				Map session = ActionContext.getContext().getSession();
 				session.put("dni", alumno.getDni());
 				session.put("nombre", alumno.getNombre());
+				session.put("role","estudiante");
 				
 				
 				return "listStudentSubjects";
@@ -100,6 +101,7 @@ public class LoginAction extends ActionSupport
 				session.put("id", profesor.getId());
 				session.put("nombre", profesor.getNombre());
 				session.put("dni", profesor.getDni());
+				session.put("role","profesor");
 				
 				return "listLecturerSubjects";
 			} 
