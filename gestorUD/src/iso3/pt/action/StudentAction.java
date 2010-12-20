@@ -2,8 +2,10 @@ package iso3.pt.action;
 
 import iso3.pt.model.Alumno;
 import iso3.pt.model.Asignatura;
+import iso3.pt.model.Evaluacion;
 import iso3.pt.service.PtDaoService;
 
+import java.util.List;
 import java.util.Set;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -14,7 +16,62 @@ public class StudentAction extends ActionSupport
 	private Set<Asignatura> asignaturas;
 	private Set<Asignatura> asignaturasTotales;
 	private int idAsignaturaSeleccionada;
+	private List<Evaluacion> evaluaciones;
+	private Set<Evaluacion> evaluacionesSET;
+	private Alumno alumno;
+	private int idAsignatura;
+	private Asignatura asignatura;
 	
+	public Set<Evaluacion> getEvaluacionesSET() 
+	{
+		return evaluacionesSET;
+	}
+
+	public void setEvaluacionesSET(Set<Evaluacion> evaluacionesSET) 
+	{
+		this.evaluacionesSET = evaluacionesSET;
+	}
+
+	public Asignatura getAsignatura() 
+	{
+		return asignatura;
+	}
+
+	public void setAsignatura(Asignatura asignatura) 
+	{
+		this.asignatura = asignatura;
+	}
+
+	public int getIdAsignatura() 
+	{
+		return idAsignatura;
+	}
+
+	public void setIdAsignatura(int idAsignatura) 
+	{
+		this.idAsignatura = idAsignatura;
+	}
+
+	public Alumno getAlumno() 
+	{
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) 
+	{
+		this.alumno = alumno;
+	}
+
+	public List<Evaluacion> getEvaluaciones() 
+	{
+		return evaluaciones;
+	}
+
+	public void setEvaluaciones(List<Evaluacion> evaluaciones) 
+	{
+		this.evaluaciones = evaluaciones;
+	}
+
 	public int getIdAsignaturaSeleccionada() 
 	{
 		return idAsignaturaSeleccionada;
@@ -93,16 +150,29 @@ public class StudentAction extends ActionSupport
 	
 	public String mostrarNotas()
 	{
-		return null;
+		PtDaoService dao =  new PtDaoService();
+		int dniAlumno = (Integer) ActionContext.getContext().getSession().get("dni");
+		evaluaciones = dao.getEvaluacionesOrderedByAsignatura(dniAlumno);
+		alumno = dao.getAlumno(dniAlumno);
+		return "listaNotasAlumno";
 	}
 	
 	public String desmatricular()
 	{
-		return null;
+		PtDaoService dao = new PtDaoService();
+		int dniAlumno = (Integer) ActionContext.getContext().getSession().get("dni");
+		dao.desmatricular(dniAlumno, idAsignatura);
+		return "desmatriculado";
 	}
 	
 	public String verNotas()
 	{
-		return null;
+		PtDaoService dao =  new PtDaoService();
+		int dniAlumno = (Integer) ActionContext.getContext().getSession().get("dni");
+		alumno = dao.getAlumno(dniAlumno);
+		asignatura = dao.getAsignatura(idAsignatura);
+		evaluacionesSET = dao.getEvaluaciones(idAsignatura, dniAlumno);
+
+		return "mostrarNotas";
 	}
 }
