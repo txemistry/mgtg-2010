@@ -1,11 +1,10 @@
 package iso3.pt.action;
 
-import java.util.Set;
-
 import iso3.pt.model.Alumno;
 import iso3.pt.model.Asignatura;
 import iso3.pt.service.PtDaoService;
-import iso3.pt.service.PtService;
+
+import java.util.Set;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -13,6 +12,10 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LecturerAction extends ActionSupport 
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer idAsignatura;
 	private String nomAsignatura;
 	private Set<Alumno> alumnos;

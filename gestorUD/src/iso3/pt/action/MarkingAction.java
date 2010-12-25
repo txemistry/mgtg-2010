@@ -13,6 +13,10 @@ import com.opensymphony.xwork2.Preparable;
 public class MarkingAction extends ActionSupport implements Preparable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idAsignatura;
 	private int dniAlumno;
 	private Asignatura asignatura;

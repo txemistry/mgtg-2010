@@ -4,16 +4,13 @@ package iso3.pt.action;
 //SOMOS EL GRUPO 18//
 /////////////////////
 import iso3.pt.model.Alumno;
-import iso3.pt.model.Asignatura;
 import iso3.pt.model.Profesor;
 import iso3.pt.service.PtDaoService;
 
 import java.util.Map;
-import java.util.Set;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.Preparable;
 
 public class LoginAction extends ActionSupport 
 {
