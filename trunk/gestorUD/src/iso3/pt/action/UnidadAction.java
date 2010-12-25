@@ -13,6 +13,10 @@ import com.opensymphony.xwork2.ActionSupport;
 public class UnidadAction extends ActionSupport 
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idAsignatura;
 	private Set<Unidad> unidades;
 	private Asignatura asignatura;
