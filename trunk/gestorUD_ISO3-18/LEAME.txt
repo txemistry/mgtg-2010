@@ -1,0 +1,9 @@
+Componentes del grupo 18:
+
+	Maitane Gómez Sainz       72316851-K
+	Jose Mª González Gamito   45821905-V
+
+
+Repositorio SVN:
+
+	http://code.google.com/p/mgtg-2010/
