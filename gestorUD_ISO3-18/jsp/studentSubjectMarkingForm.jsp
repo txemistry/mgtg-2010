@@ -57,8 +57,8 @@
 		
 		<s:form  action="calificar!calificar" method="POST">
 		
-			<s:hidden name="hiddenIdAsignatura"/>
-			<s:hidden name="hiddenDniAlumno"/>
+			<s:hidden name="hiddenIdAsignatura" value="%{ asignatura.id }"/>
+			<s:hidden name="hiddenDniAlumno" value="%{ alumno.dni }"/>
 			
 			<tr>
 				<td colspan="2">
